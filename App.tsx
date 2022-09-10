@@ -1,20 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { createClient } from '@urql/core';
+import React from 'react';
+import { Provider } from 'urql';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+import EditUserBase from './src/EditUserBase';
+// import DisplayUsers from './src/DisplayUsers';
+// import Pokemon from './src/Pokemon';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const client = createClient({
+  url: 'https://adapting-fawn-25.hasura.app/v1/graphql',
+  fetchOptions: () => {
+    return {
+      headers: {
+        'X-Hasura-Admin-Secret': 'HpkCbOkfo2h3STiwgqqEi3pmfcr5etYNvVFFMR1E10X4IdNbupsMpZgQ3f5Xo44T',
+      },
+    };
   },
 });
+
+const App = () => {
+  return (
+    <Provider value={client}>
+      {/* <Pokemon /> */}
+      {/* <DisplayUsers /> */}
+      <EditUserBase />
+    </Provider>
+  );
+};
+
+export default App;
