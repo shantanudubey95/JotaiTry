@@ -15,7 +15,7 @@ mutation MyMutation {
     }
   }
 `;
-notifee.app
+
 const EditUserBase = () => {
   //   const [first_name, setFirst_name] = React.useState('');
   //   const [last_name, setLast_name] = React.useState('');
